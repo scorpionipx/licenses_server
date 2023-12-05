@@ -20,3 +20,4 @@ This will create a superuser (admin) account.
 __development/server/run_server_local_6969_auto_reload.bat
 
 Development Server will be accessible at http://localhost:6969/
+Admin page will be accessible at http://localhost:6969/admin/
