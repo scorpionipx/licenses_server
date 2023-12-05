@@ -100,47 +100,6 @@ class Application(models.Model):
         return self.__str__()
 
 
-class Constraint(models.Model):
-    """
-    Constraint
-    """
-    # model manager type hint
-    # ==================================================================================================================
-    objects: models.Manager
-    # ==================================================================================================================
-
-    # administration related
-    # ==================================================================================================================
-    created = models.DateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
-    # ==================================================================================================================
-
-    # instance specific
-    # ==================================================================================================================
-    data = models.TextField(
-        verbose_name='Data',
-        max_length=2048,
-        default='',
-        blank=False,
-        null=False,
-        unique=False,
-        help_text='Constraint\'s data.',
-    )
-    # ==================================================================================================================
-
-    # relations
-    # ==================================================================================================================
-    author = models.ForeignKey(
-        verbose_name='Author',
-        to=DjangoUser,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        unique=False,
-        related_name='created_constraints',
-    )
-    # ==================================================================================================================
-
-
 class License(models.Model):
     """
     License
@@ -256,6 +215,57 @@ class License(models.Model):
         :rtype: str
         """
         return self.__str__()
+
+
+class Constraint(models.Model):
+    """
+    Constraint
+    """
+    # model manager type hint
+    # ==================================================================================================================
+    objects: models.Manager
+    # ==================================================================================================================
+
+    # administration related
+    # ==================================================================================================================
+    created = models.DateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
+    # ==================================================================================================================
+
+    # instance specific
+    # ==================================================================================================================
+    data = models.TextField(
+        verbose_name='Data',
+        max_length=2048,
+        default='',
+        blank=False,
+        null=False,
+        unique=False,
+        help_text='Constraint\'s data.',
+    )
+    # ==================================================================================================================
+
+    # relations
+    # ==================================================================================================================
+    author = models.ForeignKey(
+        verbose_name='Author',
+        to=DjangoUser,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        unique=False,
+        related_name='created_constraints',
+    )
+
+    license = models.ForeignKey(
+        to=License,
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+        unique=False,
+        related_name='constraints',
+        verbose_name='License',
+    )
+    # ==================================================================================================================
 
 
 class Event(models.Model):

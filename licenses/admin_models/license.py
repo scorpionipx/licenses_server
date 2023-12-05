@@ -1,7 +1,14 @@
-from django.contrib.admin import ModelAdmin
+from django.contrib import admin
 
 
-class LicenseAdmin(ModelAdmin):
+from licenses.models import Constraint
+
+
+class ConstraintInline(admin.TabularInline):
+    model = Constraint
+
+
+class LicenseAdmin(admin.ModelAdmin):
     """LicenseAdmin
 
     """
@@ -32,6 +39,10 @@ class LicenseAdmin(ModelAdmin):
     )
     empty_value_display = '-empty-'
     list_per_page = 20
+
+    inlines = [
+        ConstraintInline,
+    ]
 
     def has_change_permission(self, request, obj=None):
         return False
