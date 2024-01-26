@@ -116,11 +116,13 @@ class GetView(View):
             return HttpResponseBadRequest(error)
 
         entry_data = json.dumps(entry.as_dict(serializable=True), indent=2)
+        print(f'entry_data: {entry_data}')
 
         response = cryptor.encrypt(
             plain_text=entry_data.encode('utf-8'),
             aes_key=bytes.fromhex(aes_key),
             init_vector=bytes.fromhex(init_vector),
         )
+        print(f'response: {response}')
 
         return HttpResponse(response)
