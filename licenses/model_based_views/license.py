@@ -75,8 +75,10 @@ class GetView(View):
         """
 
         """
+        cryptor = Cryptor()
+
         try:
-            payload = json.loads(request.body.decode('utf-8'))
+            payload = json.loads(cryptor.decrypt(request.body.decode('utf-8')))
         except Exception as exception:
             error = f'Failed to read request: {exception}'
             return HttpResponseBadRequest(error)
@@ -105,7 +107,6 @@ class GetView(View):
 
         entry_data = json.dumps(entry.as_dict(serializable=True), indent=2)
 
-        cryptor = Cryptor()
         response = cryptor.encrypt(
             plain_text=entry_data.encode('utf-8'),
             aes_key=bytes.fromhex(aes_key),
