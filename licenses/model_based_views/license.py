@@ -78,7 +78,9 @@ class GetView(View):
         cryptor = Cryptor()
 
         try:
-            payload = json.loads(cryptor.decrypt(request.body.decode('utf-8')))
+            raw_payload = request.body.decode('utf-8')
+            print(f'raw_payload: {raw_payload}')
+            payload = json.loads(cryptor.decrypt(raw_payload))
         except Exception as exception:
             error = f'Failed to read request: {exception}'
             return HttpResponseBadRequest(error)
