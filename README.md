@@ -21,3 +21,6 @@ __development/server/run_server_local_6969_auto_reload.bat
 
 Development Server will be accessible at http://localhost:6969/
 Admin page will be accessible at http://localhost:6969/admin/
+
+
+Public/Private keys are provided just as an working example. They must be changed.
