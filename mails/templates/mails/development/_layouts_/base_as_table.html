@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HM SMTP</title>
+            <style type="text/css">
+
+            table {
+                width: 100%;
+            }
+
+            th {
+                text-align: left;
+            }
+
+            .header {
+                background-color: #212529;
+                border-bottom: solid darkorange 6px;
+                color: white;
+            }
+
+            .footer {
+                background-color: #212529;
+                border-bottom: solid darkorange 2px;
+                color: white;
+            }
+
+            a.footer_link {
+                color: darkorange;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            h3.title {
+                text-align: center;
+                border-bottom: solid darkorange 2px;
+                margin-left: 20%;
+                margin-right: 20%;
+            }
+        </style>
+</head>
+<body style="max-width: 900px; ">
+    <table>
+        <tr>
+            <td class="header">
+                <h2 style="padding-left: 10px; ">Licenses Server: {{ APP }} - {{ CATEGORY }}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <h3 class="title">{{ TITLE }}</h3>
+
+                <br>
+                {% block content %}
+                {% endblock content %}
+                <br>
+                <br>
+            </td>
+        </tr>
+        {% if hils_monitor_version %}<tr><td>v{{ hils_monitor_version }}</td></tr>{% endif %}
+        <tr>
+            <td class="footer">
+                <table>
+                    <tr>
+                        <td align="left"><a class="footer_link" href="{{ SERVER_URL }}">Licenses Server</a></td>
+                        <td align="right"><p style="font-size: 12px; ">@Continental AG IAS 2023</p></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

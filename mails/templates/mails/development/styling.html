@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Licenses Server</title>
+        <style type="text/css">
+
+            .container_header {
+                max-width: 800px;
+                padding-left: 15px;
+                padding-right: 15px;
+
+                background-color: #212529;
+                border-bottom: solid darkorange 6px;
+                color: white;
+            }
+
+            .container_body {
+                max-width: 800px;
+                padding-left: 15px;
+                padding-right: 15px;
+
+                border-top: solid darkorange 6px;
+                border-bottom: solid darkorange 6px;
+            }
+
+            .footer {
+                max-width: 800px;
+                padding-left: 15px;
+                padding-right: 15px;
+
+                background-color: #212529;
+                color: white;
+            }
+
+            a.footer_link {
+                color: darkorange;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            th {
+                text-align: left;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container_header">
+            <h2 style="padding-left: 10px; ">Licenses Server: {{ APP }} - {{ CATEGORY }}</h2>
+        </div>
+        <div class="container_body">
+            <h3>{{ TITLE }}</h3>
+            <hr style="border: solid darkorange 2px;">
+            <p>Cum vi se pare acest format de e-mail-uri?</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Receivers</th>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td>developers</td>
+                </tr>
+            </table>
+            <br>
+            <hr>
+            <br>
+            <hr style="border: solid darkorange 2px;">
+            <p>Some additional information</p>
+        </div>
+
+        <div class="footer">
+            <table>
+                <tr>
+                    <td align="left"><a class="footer_link" href="{{ SERVER_URL }}">Licenses Server</a></td>
+                    <td align="right"><p style="font-size: 12px; ">@Continental AG IAS 2022</p></td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+</html>
