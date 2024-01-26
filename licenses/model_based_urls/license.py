@@ -18,7 +18,16 @@ as_json_for_humans_path = path(
 )
 
 
+get_path = path(
+    r'get/',
+    license_views.GetView.as_view(),
+    name='get',
+)
+
+
 urlpatterns = (
     as_json_path,
     as_json_for_humans_path,
+
+    get_path,
 )
