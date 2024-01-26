@@ -85,21 +85,25 @@ class GetView(View):
             payload = json.loads(decrypted_payload)
         except Exception as exception:
             error = f'Failed to read request: {exception}'
+            print(error)
             return HttpResponseBadRequest(error)
 
         aes_key = payload.get('AESKey', None)
         if not aes_key:
             error = 'No AES key specified!'
+            print(error)
             return HttpResponseBadRequest(error)
 
         init_vector = payload.get('InitVector', None)
         if not init_vector:
             error = 'No InitVector specified!'
+            print(error)
             return HttpResponseBadRequest(error)
 
         serial_no = payload.get('SerialNo', None)
         if not serial_no:
             error = 'No SerialNo specified!'
+            print(error)
             return HttpResponseBadRequest(error)
 
         try:
@@ -107,6 +111,7 @@ class GetView(View):
             entry: License
         except License.DoesNotExist as exception:
             error = f'Failed to find matching License: {exception}'
+            print(error)
             return HttpResponseBadRequest(error)
 
         entry_data = json.dumps(entry.as_dict(serializable=True), indent=2)
