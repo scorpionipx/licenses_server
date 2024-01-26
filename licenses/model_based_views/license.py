@@ -83,6 +83,7 @@ class GetView(View):
             decrypted_payload = cryptor.decrypt(raw_payload)
             print(f'decrypted_payload: {decrypted_payload}')
             payload = json.loads(decrypted_payload)
+            print(f'payload: {payload}')
         except Exception as exception:
             error = f'Failed to read request: {exception}'
             print(error)
