@@ -78,7 +78,7 @@ class GetView(View):
         cryptor = Cryptor()
 
         try:
-            raw_payload = request.body.decode('utf-8')
+            raw_payload = request.body
             print(f'raw_payload: {raw_payload}')
             decrypted_payload = cryptor.decrypt(raw_payload)
             print(f'decrypted_payload: {decrypted_payload}')
