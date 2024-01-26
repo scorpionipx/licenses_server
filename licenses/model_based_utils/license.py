@@ -8,9 +8,6 @@ if False:
 
 def as_dict(entry, serializable=False):
     related_fields = [field for field in entry.meta.get_fields() if 'Rel' in f'{type(field)}']
-    print(related_fields)
-    for rf in related_fields:
-        print(rf.name)
     entry: License
     data = {}
     for key, value in entry.__dict__.items():
