@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 
-from licenses.models import Constraint
+from licenses.models import License, Constraint
+from licenses.model_based_utils.license import generate_serial_no
 
 
 class ConstraintInline(admin.TabularInline):
@@ -60,3 +61,6 @@ class LicenseAdmin(admin.ModelAdmin):
         html = f'<a href="{entry.as_json_url}">link</a> / <a href="{entry.as_json_for_humans_url}">link 4 humans</a>'
         return format_html(html)
     as_json_urls.short_description = 'As JSON'
+
+    def get_changeform_initial_data(self, request):
+        return {'serial_no': generate_serial_no(request, License)}

@@ -1,6 +1,7 @@
 import datetime
 import json
-
+import random
+import string
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization, hashes, padding
@@ -115,3 +116,14 @@ class Cryptor:
         decrypted = unpadder.update(decrypted_padded) + unpadder.finalize()
 
         return decrypted
+
+
+def generate_serial_no(request, model):
+    """
+    generate_serial_no
+    """
+    letters = string.ascii_uppercase
+    serial_no = ''.join(random.choice(letters) for _ in range(59)) + f'{model.objects.first().pk:05d}'
+
+    return serial_no
+
