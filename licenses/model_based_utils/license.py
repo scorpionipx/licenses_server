@@ -123,7 +123,13 @@ def generate_serial_no(request, model):
     generate_serial_no
     """
     letters = string.ascii_uppercase
-    serial_no = ''.join(random.choice(letters) for _ in range(59)) + f'{model.objects.first().pk:05d}'
+    last_registered_entry = model.objects.first()
+    if last_registered_entry:
+        pk = last_registered_entry.pk
+    else:
+        pk = 0
+
+    serial_no = ''.join(random.choice(letters) for _ in range(59)) + f'{pk:05d}'
 
     return serial_no
 
