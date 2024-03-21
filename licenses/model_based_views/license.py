@@ -115,7 +115,7 @@ class GetView(View):
                 return HttpResponseBadRequest(error)
 
             try:
-                entry = License.object.get(description__iexact='continental license')
+                entry = License.objects.get(description__iexact='continental license')
             except License.DoesNotExist as exception:
                 error = f'Failed to find matching Continental License: {exception}'
                 return HttpResponseBadRequest(error)
