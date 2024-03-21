@@ -103,9 +103,34 @@ class GetView(View):
 
         serial_no = payload.get('SerialNo', None)
         if not serial_no:
-            error = 'No SerialNo specified!'
-            print(error)
-            return HttpResponseBadRequest(error)
+            content = payload.get('content')
+            if not content:
+                error = 'No SerialNo specified!'
+                return HttpResponseBadRequest(error)
+
+            content: dict
+            conti_license = content.get('ContiLicense')
+            if not conti_license:
+                error = 'No SerialNo specified!'
+                return HttpResponseBadRequest(error)
+
+            try:
+                entry = License.object.get(description__iexact='continental license')
+            except License.DoesNotExist as exception:
+                error = f'Failed to find matching Continental License: {exception}'
+                return HttpResponseBadRequest(error)
+
+            entry_data = json.dumps(entry.as_dict(serializable=True), indent=2)
+            print(f'entry_data: {entry_data}')
+
+            response = cryptor.encrypt(
+                plain_text=entry_data.encode('utf-8'),
+                aes_key=bytes.fromhex(aes_key),
+                init_vector=bytes.fromhex(init_vector),
+            )
+            print(f'response: {response}')
+
+            return HttpResponse(response)
 
         try:
             entry = License.objects.get(serial_no=serial_no)
