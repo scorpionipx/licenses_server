@@ -109,7 +109,7 @@ class GetView(View):
                 return HttpResponseBadRequest(error)
 
             content: dict
-            conti_license = content.get('ContiLicense')
+            conti_license = content.get('CL')
             if not conti_license:
                 error = 'No SerialNo specified!'
                 return HttpResponseBadRequest(error)
