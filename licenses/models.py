@@ -12,6 +12,9 @@ from licenses.model_based_utils.license import (
 )
 
 
+from licenses_server.utils.validators.v_json import validate_json
+
+
 class Application(models.Model):
     """
     Application
@@ -129,6 +132,19 @@ class License(models.Model):
         verbose_name='Archived',
         default=False,
         help_text='Archived.',
+    )
+
+    constraints = models.TextField(
+        verbose_name='Constraints',
+        max_length=1024,
+        default='{}',
+        blank=True,
+        null=True,
+        unique=False,
+        help_text='Constraints',
+        validators=(
+            validate_json,
+        )
     )
 
     description = models.TextField(
@@ -270,57 +286,6 @@ class License(models.Model):
             }
         )
         return url
-
-
-class Constraint(models.Model):
-    """
-    Constraint
-    """
-    # model manager type hint
-    # ==================================================================================================================
-    objects: models.Manager
-    # ==================================================================================================================
-
-    # administration related
-    # ==================================================================================================================
-    created = models.DateTimeField(auto_now_add=True, editable=False, blank=True, null=True)
-    # ==================================================================================================================
-
-    # instance specific
-    # ==================================================================================================================
-    data = models.TextField(
-        verbose_name='Data',
-        max_length=2048,
-        default='',
-        blank=False,
-        null=False,
-        unique=False,
-        help_text='Constraint\'s data.',
-    )
-    # ==================================================================================================================
-
-    # relations
-    # ==================================================================================================================
-    author = models.ForeignKey(
-        verbose_name='Author',
-        to=DjangoUser,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        unique=False,
-        related_name='created_constraints',
-    )
-
-    license = models.ForeignKey(
-        to=License,
-        on_delete=models.CASCADE,
-        blank=False,
-        null=False,
-        unique=False,
-        related_name='constraints',
-        verbose_name='License',
-    )
-    # ==================================================================================================================
 
 
 class Event(models.Model):

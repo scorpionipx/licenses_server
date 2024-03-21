@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+
+
+<html lang="en">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="ScorpionIPX">
+
+        <title>{% block title %}Licenses Server{% endblock title %}</title>
+
+        {% block css %}
+            <link href="{% static 'themes/sb_admin/assets/css/sb-admin-2.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'themes/sb_admin/assets/plugins/fontawesome-free/css/all.min.css' %}" rel="stylesheet"/>
+        {% endblock css %}
+    {% endblock head %}
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {% include 'themes/sb_admin/sidebar/core.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                            {% include 'themes/sb_admin/home/authenticated.html' %}
+                        {% else %}
+                            {% include 'themes/sb_admin/home/not_authenticated.html' %}
+                        {% endif %}
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <div class="container-fluid">
+                    {% block container %}
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">{% block header %} Header {% endblock header %}</h1>
+                        </div>
+                        {% block content %}
+                        {% endblock content %}
+                    {% endblock container %}
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Licenses Server 2024</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    {% block js %}
+        <script src="{% static 'themes/sb_admin/assets/plugins/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'themes/sb_admin/assets/plugins/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'themes/sb_admin/assets/plugins/fontawesome-free/js/all.min.js' %}"></script>
+        <script src="{% static 'themes/sb_admin/assets/js/sb-admin-2.min.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>

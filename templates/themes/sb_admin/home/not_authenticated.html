@@ -1,0 +1,27 @@
+<div class="panel panel-inverse" data-sortable-id="ui-general-3">
+    <div class="panel-heading">
+        <h4 class="panel-title">Welcome!</h4>
+        <div class="panel-heading-btn">
+            <a href="javascript:" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="note note-primary mb-2">
+            <div class="note-icon"><i class="fas fa-info-circle"></i></div>
+            <div class="note-content">
+                <h4><b>Hello!</b></h4>
+                <p>
+                    Welcome to {{ view.PROJECT }} v{{ view.VERSION }}!
+                </p>
+                <p>
+                    Please note that some features from the older versions are not implemented yet. Please notify us via
+                    an issue/request ticket <a href="https://github.geo.conti.de/CVWWTF/hils_monitor/issues" style="color: darkorange">here</a>. We will work on it as soon as possible.
+                </p>
+                <p>
+                    To enjoy most of the {{ view.PROJECT }} features, please use Google Chrome Browser and <a href="{% url 'login' %}" style="color: darkorange">login</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

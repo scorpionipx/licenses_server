@@ -129,7 +129,7 @@ def generate_serial_no(request, model):
     else:
         pk = 0
 
-    serial_no = ''.join(random.choice(letters) for _ in range(59)) + f'{pk:05d}'
+    serial_no = ''.join(random.choice(letters) for _ in range(27)) + f'{pk:05d}'
 
     return serial_no
 
