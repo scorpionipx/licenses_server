@@ -29,6 +29,8 @@ def as_dict(entry, serializable=False):
                 if isinstance(value, datetime.datetime):
                     value = f'{value}'
             data[key] = value
+            if key == 'constraints':
+                data[key] = json.loads(value)
             if key.endswith('_id'):
                 new_key = key.replace('_id', '')
                 data[new_key] = f'{getattr(entry, new_key)}'
