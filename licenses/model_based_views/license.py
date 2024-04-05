@@ -1,4 +1,6 @@
 import json
+import re
+from packaging.version import parse as version_parser
 
 
 from django.http import (
@@ -114,11 +116,36 @@ class GetView(View):
                 error = 'No SerialNo specified!'
                 return HttpResponseBadRequest(error)
 
-            try:
-                entry = License.objects.get(description__iexact='continental license')
-            except License.DoesNotExist as exception:
-                error = f'Failed to find matching Continental License: {exception}'
+            conti_licenses = License.objects.filter(description__iexact='continental license')
+            version = content.get('version')
+
+            match = re.findall(r'(?i)[a-z]', version)
+            entry = License.objects.none()
+
+            for licence in conti_licenses:
+                locale: License
+                constraints = json.loads(licence.constraints)
+
+                license_min_version = constraints.get('min_version')
+                license_max_version = constraints.get('max_version')
+                if match:
+                    if license_min_version == version:
+                        entry = licence
+                        break
+                else:
+                    if version_parser(license_min_version) <= version_parser(version) <= version_parser(license_max_version):
+                        entry = licence
+                        break
+            else:
+                error = f'Failed to find matching License version: {version}'
+                print(error)
                 return HttpResponseBadRequest(error)
+
+            # try:
+            #     entry = License.objects.get(description__iexact='continental license')
+            # except License.DoesNotExist as exception:
+            #     error = f'Failed to find matching Continental License: {exception}'
+            #     return HttpResponseBadRequest(error)
 
             entry_data = json.dumps(entry.as_dict(serializable=True), indent=2)
             print(f'entry_data: {entry_data}')
